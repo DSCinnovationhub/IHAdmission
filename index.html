@@ -4,33 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innovation Hub Purulia Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: "Times New Roman", Times, serif;
+        :root {
+            --primary: #bb86fc;
+            --primary-variant: #3700b3;
+            --secondary: #03dac6;
+            --background: #121212;
+            --surface: #1e1e1e;
+            --error: #cf6679;
+            --on-primary: #000000;
+            --on-secondary: #000000;
+            --on-background: #e0e0e0;
+            --on-surface: #e0e0e0;
+            --on-error: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            color: #e0e0e0;
-            background: #121212; /* Dark background for theme */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--on-background);
+            background: var(--background);
+            overflow-x: hidden;
         }
 
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: #121212;
+            background: var(--background);
             z-index: -1;
         }
 
-        #adminLoginModal {
-            display: block;
-            margin-top: 50px;
-            text-align: center;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            padding: 20px;
+        /* Smooth transitions for all elements */
+        * {
+            transition: all 0.3s ease;
         }
 
+        /* Header styles */
         header {
             display: flex;
             align-items: center;
@@ -38,124 +56,276 @@
             padding: 15px;
             background: rgba(30, 30, 30, 0.9);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 10;
         }
 
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 280px;
+            height: 100px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-small {
+            width: 80px;
+            height: auto;
+        }
+
+        /* Navigation styles */
         nav {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
+            background-color: var(--surface);
+            color: var(--on-surface);
             display: flex;
             justify-content: center;
             padding: 10px 0;
             gap: 20px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         nav a {
-            color: #e0e0e0;
+            color: var(--on-surface);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             padding: 10px 15px;
             border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
         }
 
         nav a:hover {
-            background-color: #3a3a3a;
+            color: var(--primary);
         }
 
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Container styles */
         .container {
             max-width: 1000px;
             margin: 20px auto;
-            padding: 20px;
+            padding: 30px;
             background: rgba(30, 30, 30, 0.7);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .active {
+        .container.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite;
+            background-size: 200% 200%;
         }
 
         h2 {
-            text-align: center;
             font-size: 2rem;
-            color: #bb86fc;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
 
         h3 {
-            text-align: center;
-            font-size: 1.3rem;
-            color: #bb86fc;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         p {
-            text-align: justify;
-            font-size: 1.2rem;
-            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--on-surface);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--on-surface);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(187, 134, 252, 0.3);
+        }
+
+        /* Button styles */
+        button {
+            background-color: var(--primary);
+            color: var(--on-primary);
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #a370d7;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background-color: #444;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        /* Table styles */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #444;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         th, td {
-            padding: 10px;
+            padding: 12px 15px;
             text-align: center;
+            border: 1px solid #444;
         }
 
         th {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
+            background-color: var(--primary);
+            color: var(--on-primary);
+            font-weight: 500;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
-        label {
-            font-weight: bold;
-            color: #e0e0e0;
+        tr:hover {
+            background-color: rgba(187, 134, 252, 0.1);
         }
 
-        input, select {
-            padding: 8px;
-            font-size: 1rem;
-            border: 1px solid #444;
-            border-radius: 5px;
-            width: 100%;
-            background: #2a2a2a;
-            color: #e0e0e0;
-        }
-
-        button {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-            padding: 10px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
-        }
-
-        button:hover {
-            background: #bb86fc;
-        }
-
+        /* Slider styles */
         .slider-container {
-            width: 1000px;
+            width: 100%;
+            max-width: 1000px;
             height: 400px;
             overflow: hidden;
             position: relative;
-            margin: auto;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
 
         .slider img {
@@ -173,21 +343,21 @@
             opacity: 1;
         }
 
+        /* Utility classes */
         .datetime {
             position: absolute;
             left: 20px;
             top: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #e0e0e0;
-            font-family: 'Times New Roman', serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--on-surface);
         }
 
         .language-switcher {
             position: absolute;
             right: 20px;
             top: 10px;
-            font-size: 16px;
+            font-size: 14px;
             z-index: 1000;
         }
 
@@ -198,15 +368,17 @@
             padding: 8px 15px;
             border-radius: 25px;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 500;
             display: flex;
             align-items: center;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         .translate-btn:hover {
             background: linear-gradient(45deg, #34A853, #4285F4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .translate-icon {
@@ -221,8 +393,8 @@
 
         .social-media {
             position: absolute;
-            top: 5px;
-            left: 1420px;
+            right: 20px;
+            top: 10px;
             z-index: 1000;
             display: flex;
             gap: 10px;
@@ -235,7 +407,13 @@
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-media a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .facebook-link {
@@ -255,7 +433,7 @@
         }
 
         .gmail-link {
-            background: green;
+            background: #34A853;
         }
 
         .gmail-link:hover {
@@ -265,6 +443,135 @@
         .social-icon {
             width: 25px;
             height: 25px;
+        }
+
+        /* List styles */
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                width: 200px;
+                height: auto;
+            }
+
+            .logo-small {
+                width: 60px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 5px;
+                padding: 10px;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .slider-container {
+                height: 250px;
+            }
+
+            .social-media {
+                position: static;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .datetime, .language-switcher {
+                position: static;
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 
@@ -295,14 +602,14 @@
             </a>
         </div>
 
-        <div style="display: flex; align-items: center; justify-content: center; text-align: center;">
-            <img src="https://ncsm.gov.in/storage/files/image-7.png" alt="Logo" style="width: 280px; height: 100px; margin-right: 15px;">
+        <div class="header-content">
+            <img src="https://ncsm.gov.in/storage/files/image-7.png" alt="Logo" class="logo">
             <div>
-                <h1 style="font-size: 3em; margin-bottom: 0; color: #e0e0e0;">DSC Innovation Hub, Purulia</h1>
-                <h3 style="font-size: 1.2em; margin-top: 0; color: #e0e0e0;">A unit of NCSM, Ministry of Culture, Govt. of India</h3>
+                <h1>DSC Innovation Hub, Purulia</h1>
+                <h3>A unit of NCSM, Ministry of Culture, Govt. of India</h3>
             </div>
-            <img src="https://sciencecitykolkata.org.in/wp-content/uploads/2020/02/NCSM-Logo-460x460-1.png" alt="Logo" style="width: 80px; height: auto; margin-left: 15px;">
-            <img src="https://seeklogo.com/images/B/beti-padhao-beti-bachao-logo-29C4C0AF1B-seeklogo.com.png" alt="Logo" style="width: 80px; height: auto; margin-left: 15px;">
+            <img src="https://sciencecitykolkata.org.in/wp-content/uploads/2020/02/NCSM-Logo-460x460-1.png" alt="Logo" class="logo-small">
+            <img src="https://seeklogo.com/images/B/beti-padhao-beti-bachao-logo-29C4C0AF1B-seeklogo.com.png" alt="Logo" class="logo-small">
         </div>
     </header>
 
@@ -374,74 +681,121 @@
     <!-- Registration Page -->
     <div id="registrationPage" class="container">
         <h2>Student Registration</h2>
-        <form id="registrationForm" onsubmit="sendToGoogleSheet(event)">
-            <label for="subject">Choose Subject:</label>
-            <select id="subject" name="subject" required>
-                <option value="Electronics & Robotics">Electronics & Robotics</option>
-                <option value="Life Science & Chemistry">Life Science & Chemistry</option>
-            </select>
-            <label for="slot">Choose Slot:</label>
-            <select id="slot" name="slot" required>
-                <option value="Saturday 11 A.M">Saturday 11 A.M</option>
-                <option value="Saturday 3 P.M">Saturday 3 P.M</option>
-                <option value="Sunday 11 A.M">Sunday 11 A.M</option>
-                <option value="Sunday 3 P.M">Sunday 3 P.M</option>
-            </select>
-            <label for="studentName">Student Name:</label>
-            <input type="text" id="studentName" name="studentName" required>
-            <label for="class">Class:</label>
-            <select id="class" name="class" required>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-            </select>
-            <label for="schoolName">School Name:</label>
-            <input type="text" id="schoolName" name="schoolName" required>
-            <label for="fatherName">Father's Name:</label>
-            <input type="text" id="fatherName" name="fatherName" required>
-            <label for="address">Address (Road/Locality):</label>
-            <input type="text" id="address" name="address" required>
-            <label for="district">District:</label>
-            <input type="text" id="district" name="district" required>
-            <label for="state">State:</label>
-            <input type="text" id="state" name="state" required>
-            <label for="pincode">Pin Code:</label>
-            <input type="text" id="pincode" name="pincode" required>
-            <label for="mobile">Mobile Number:</label>
-            <input type="text" id="mobile" name="mobile" required>
-            <label for="email">Email ID:</label>
-            <input type="email" id="email" name="email" required>
-            <button type="submit">Submit</button>
+        <form id="registrationForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+                <label for="subject">Choose Subject:</label>
+                <select id="subject" name="subject" required>
+                    <option value="">-- Select Subject --</option>
+                    <option value="Electronics & Robotics">Electronics & Robotics</option>
+                    <option value="Life Science & Chemistry">Life Science & Chemistry</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="slot">Choose Slot:</label>
+                <select id="slot" name="slot" required>
+                    <option value="">-- Select Time Slot --</option>
+                    <option value="Saturday 11 A.M">Saturday 11 A.M</option>
+                    <option value="Saturday 3 P.M">Saturday 3 P.M</option>
+                    <option value="Sunday 11 A.M">Sunday 11 A.M</option>
+                    <option value="Sunday 3 P.M">Sunday 3 P.M</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" name="studentName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="class">Class:</label>
+                <select id="class" name="class" required>
+                    <option value="">-- Select Class --</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="schoolName">School Name:</label>
+                <input type="text" id="schoolName" name="schoolName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fatherName">Father's Name:</label>
+                <input type="text" id="fatherName" name="fatherName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address (Road/Locality):</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="district">District:</label>
+                <input type="text" id="district" name="district" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pincode">Pin Code:</label>
+                <input type="text" id="pincode" name="pincode" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="text" id="mobile" name="mobile" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <button type="submit" id="submitBtn">
+                <span id="submitText">Submit</span>
+            </button>
         </form>
     </div>
 
     <!-- Statistics Page -->
     <div id="statisticsPage" class="container">
         <h2>Admission Data Statistics</h2>
-        <label for="yearSelector">Select Year:</label>
-        <select id="yearSelector">
-            <option value="" disabled selected>Select Year</option>
-        </select>
-        <label for="monthSelector">Select Month:</label>
-        <select id="monthSelector" disabled>
-            <option value="" disabled selected>Select Month</option>
-            <option value="01">January</option>
-            <option value="02">February</option>
-            <option value="03">March</option>
-            <option value="04">April</option>
-            <option value="05">May</option>
-            <option value="06">June</option>
-            <option value="07">July</option>
-            <option value="08">August</option>
-            <option value="09">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-        </select>
+        <div class="form-group">
+            <label for="yearSelector">Select Year:</label>
+            <select id="yearSelector">
+                <option value="" disabled selected>Select Year</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="monthSelector">Select Month:</label>
+            <select id="monthSelector" disabled>
+                <option value="" disabled selected>Select Month</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+        
         <table>
             <thead>
                 <tr>
@@ -478,12 +832,48 @@
                     opacity: 0.4,
                     width: 1
                 },
-                move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+                move: { 
+                    enable: true, 
+                    speed: 2, 
+                    direction: "none", 
+                    random: false, 
+                    straight: false, 
+                    out_mode: "out", 
+                    bounce: false,
+                    attract: {
+                        enable: true,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
             },
             interactivity: {
                 detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+                events: { 
+                    onhover: { 
+                        enable: true, 
+                        mode: "repulse",
+                        parallax: {
+                            enable: true,
+                            force: 60,
+                            smooth: 10
+                        }
+                    }, 
+                    onclick: { 
+                        enable: true, 
+                        mode: "push" 
+                    }, 
+                    resize: true 
+                },
+                modes: { 
+                    repulse: { 
+                        distance: 100, 
+                        duration: 0.4 
+                    }, 
+                    push: { 
+                        particles_nb: 4 
+                    } 
+                }
             },
             retina_detect: true
         });
@@ -575,24 +965,35 @@
             var element = document.getElementById("google_translate_element");
             element.classList.toggle("hidden");
         }
-    </script>
 
-    <script type="text/javascript" 
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-    </script>
-
-    <script>
         const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzfY_geafN07hlRibTJaXMopjAUTpErrOh99RtKJueYkRy2J4yIxKA86BAXOWg_C1G6/exec';
         const apiUrl = 'https://script.google.com/macros/s/AKfycbzfY_geafN07hlRibTJaXMopjAUTpErrOh99RtKJueYkRy2J4yIxKA86BAXOWg_C1G6/exec';
 
-        function sendToGoogleSheet(event) {
+        // Handle form submission with button disable feature
+        function handleFormSubmit(event) {
             event.preventDefault();
+            
+            // Disable the submit button
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            
+            submitBtn.disabled = true;
+            submitText.innerHTML = '<span class="spinner"></span> Processing...';
+            
+            // Get form data
             const formData = new FormData(document.getElementById('registrationForm'));
+            
+            // Send data to Google Sheet
             fetch(googleSheetUrl, {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
             .then(result => {
                 alert('Registration successful');
                 generatePDF();
@@ -600,38 +1001,45 @@
             })
             .catch(error => {
                 alert('Error: ' + error.message);
+            })
+            .finally(() => {
+                // Re-enable the button after 3 seconds (even if there was an error)
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitText.textContent = 'Submit';
+                }, 3000);
             });
         }
 
-       function generatePDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('l', 'mm', [215.9, 156.7]);
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('l', 'mm', [215.9, 156.7]);
 
-    // Collect all form data
-    const subject = document.getElementById('subject').value;
-    const slot = document.getElementById('slot').value;
-    const studentName = document.getElementById('studentName').value;
-    const classValue = document.getElementById('class').value;
-    const schoolName = document.getElementById('schoolName').value;
-    const fatherName = document.getElementById('fatherName').value;
-    const address = document.getElementById('address').value;
-    const district = document.getElementById('district').value;
-    const state = document.getElementById('state').value;
-    const pincode = document.getElementById('pincode').value;
-    const mobile = document.getElementById('mobile').value;
-    const email = document.getElementById('email').value;
-    const currentDate = new Date();
-    const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
-    
-    // Calculate expiry date (1 year from current date)
-    const expiryDate = new Date(currentDate);
-    expiryDate.setFullYear(currentDate.getFullYear() + 1);
-    const formattedExpiryDate = `${expiryDate.getDate()}/${expiryDate.getMonth() + 1}/${expiryDate.getFullYear()}`;
+            // Collect all form data
+            const subject = document.getElementById('subject').value;
+            const slot = document.getElementById('slot').value;
+            const studentName = document.getElementById('studentName').value;
+            const classValue = document.getElementById('class').value;
+            const schoolName = document.getElementById('schoolName').value;
+            const fatherName = document.getElementById('fatherName').value;
+            const address = document.getElementById('address').value;
+            const district = document.getElementById('district').value;
+            const state = document.getElementById('state').value;
+            const pincode = document.getElementById('pincode').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+            
+            // Calculate expiry date (1 year from current date)
+            const expiryDate = new Date(currentDate);
+            expiryDate.setFullYear(currentDate.getFullYear() + 1);
+            const formattedExpiryDate = `${expiryDate.getDate()}/${expiryDate.getMonth() + 1}/${expiryDate.getFullYear()}`;
 
-    // Create a string with all form data for the QR code
-    const qrData = `Subject: ${subject}\nSlot: ${slot}\nStudent Name: ${studentName}\nClass: ${classValue}\nSchool Name: ${schoolName}\nFather's Name: ${fatherName}\nAddress: ${address}\nDistrict: ${district}\nState: ${state}\nPincode: ${pincode}\nMobile: ${mobile}\nEmail: ${email}\nAdmission Date: ${formattedDate}\nExpiry Date: ${formattedExpiryDate}`;
+            // Create a string with all form data for the QR code
+            const qrData = `Subject: ${subject}\nSlot: ${slot}\nStudent Name: ${studentName}\nClass: ${classValue}\nSchool Name: ${schoolName}\nFather's Name: ${fatherName}\nAddress: ${address}\nDistrict: ${district}\nState: ${state}\nPincode: ${pincode}\nMobile: ${mobile}\nEmail: ${email}\nAdmission Date: ${formattedDate}\nExpiry Date: ${formattedExpiryDate}`;
 
-    // Generate QR code for all form data
+            // Generate QR code for all form data
     const qrCanvas = document.createElement('canvas');
     QRCode.toCanvas(qrCanvas, qrData, { width: 40 }, function (error) {
         if (error) console.error(error);
